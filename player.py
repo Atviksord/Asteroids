@@ -55,7 +55,7 @@ class Player(CircleShape):
         if self.cooldown <= 0:
             self.cooldown = MEGA_SHOT_COOLDOWN
             megashot = Megashot(self.position.x ,self.position.y)
-            megashot.velocity = pygame.Vector2(1, 1).rotate(self.rotation ) * PLAYER_SHOOT_SPEED
+            megashot.velocity = pygame.Vector2(0, 0.4).rotate(self.rotation + 90 ) * PLAYER_SHOOT_SPEED
 
     
             
