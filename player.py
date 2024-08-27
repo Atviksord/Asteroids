@@ -2,6 +2,7 @@ import pygame
 from circleshape import CircleShape
 from constants import *
 from shot import Shot
+from megashot import Megashot
 
 class Player(CircleShape):
     def __init__(self, x, y):
@@ -37,6 +38,8 @@ class Player(CircleShape):
             self.move(-dt)
         if keys[pygame.K_SPACE]:
             self.shoot()
+        if keys[pygame.K_t]:
+            self.megashoot()
     
     def rotate(self,dt):
         self.rotation += PLAYER_TURN_SPEED * dt
@@ -48,7 +51,11 @@ class Player(CircleShape):
             self.cooldown = PLAYER_SHOOT_COOLDOWN
             shot = Shot(self.position.x, self.position.y)
             shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
-
+    def megashoot(self):
+        if self.cooldown <= 0:
+            self.cooldown = MEGA_SHOT_COOLDOWN
+            megashot = Megashot(self.position.x ,self.position.y)
+            megashot.velocity = pygame.Vector2(1, 1).rotate(self.rotation ) * PLAYER_SHOOT_SPEED
 
     
             

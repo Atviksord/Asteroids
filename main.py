@@ -5,6 +5,7 @@ from player import Player
 from Asteroid import *
 from asteroidfield import AsteroidField
 from shot import Shot
+from megashot import Megashot
 
 
 
@@ -16,11 +17,15 @@ def main():
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
+    megashots = pygame.sprite.Group()
+
+
 
     AsteroidField.containers = updateable
     Asteroid.containers = (asteroids, updateable, drawable)
     Player.containers = (updateable, drawable)
     Shot.containers = (updateable, drawable, shots)
+    Megashot.containers = (updateable,drawable,megashots)
 
 
     player = Player(SCREEN_WIDTH /2,SCREEN_HEIGHT/2)
@@ -41,11 +46,17 @@ def main():
         for asteroid in asteroids:
             if asteroid.collisioncheck(player):
                 print("Game over!")
-                sys.exit()
+
+            for megashot in megashots:
+                if asteroid.collisioncheck(megashot):
+                    asteroid.kill()
+                    megashot.kill()
+                       
             for shot in shots:
                 if asteroid.collisioncheck(shot):
                     asteroid.split()
                     shot.kill()
+            
 
         screen.fill("black")
         for stuff in drawable:
