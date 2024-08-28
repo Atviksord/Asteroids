@@ -7,6 +7,7 @@ class Megashot(CircleShape):
        super().__init__(x, y, SHOT_RADIUS)
     def draw(self, screen):
         pygame.draw.circle(screen,"gold",self.position,20,20)
+        ##pygame.draw.line(screen,"orange",self.position,self.longerpos, 10)
    
     def update(self, dt):
         self.position += self.velocity * dt

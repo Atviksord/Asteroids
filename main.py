@@ -6,6 +6,7 @@ from Asteroid import *
 from asteroidfield import AsteroidField
 from shot import Shot
 from megashot import Megashot
+from player2 import Player2
 
 
 
@@ -26,9 +27,11 @@ def main():
     Player.containers = (updateable, drawable)
     Shot.containers = (updateable, drawable, shots)
     Megashot.containers = (updateable,drawable,megashots)
+    Player2.containers = (updateable,drawable)
 
 
     player = Player(SCREEN_WIDTH /2,SCREEN_HEIGHT/2)
+    player2 = Player2(SCREEN_WIDTH / 3, SCREEN_HEIGHT /3)
     asteroidfield1 = AsteroidField()
     
     
@@ -45,13 +48,33 @@ def main():
         
         for asteroid in asteroids:
             if asteroid.collisioncheck(player):
-                print("Game over!")
+                print("Life lost!!")
+                
+                player.kill()
+                
+                player.health -= 1
+                player = Player(SCREEN_WIDTH /2,SCREEN_HEIGHT/2,player.health)
+                print(player.health)
+                if player.health <= 0:
+                    player.kill()
+                
+            if asteroid.collisioncheck(player2):
+                print()
+                
+                player2.kill()
+                
+                player2.health -= 1
+                player2 = Player2(SCREEN_WIDTH /2,SCREEN_HEIGHT/2,player2.health)
+
+                if player2.health <= 0:
+                    player2.kill()
+                    
 
             for megashot in megashots:
                 if asteroid.collisioncheck(megashot):
                     asteroid.kill()
                     megashot.kill()
-                       
+
             for shot in shots:
                 if asteroid.collisioncheck(shot):
                     asteroid.split()
