@@ -48,10 +48,7 @@ def main():
         
         for asteroid in asteroids:
             if asteroid.collisioncheck(player):
-                print("Life lost!!")
-                
                 player.kill()
-                
                 player.health -= 1
                 player = Player(SCREEN_WIDTH /2,SCREEN_HEIGHT/2,player.health)
                 print(player.health)
@@ -59,15 +56,14 @@ def main():
                     player.kill()
                 
             if asteroid.collisioncheck(player2):
-                print()
-                
                 player2.kill()
-                
                 player2.health -= 1
                 player2 = Player2(SCREEN_WIDTH /2,SCREEN_HEIGHT/2,player2.health)
-
                 if player2.health <= 0:
                     player2.kill()
+            if player.health and player2.health <= 0:
+                print("--------GAME OVER-------")
+                sys.quit()
                     
 
             for megashot in megashots:

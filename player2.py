@@ -12,6 +12,7 @@ class Player2(CircleShape):
         self.rotation = 0
         self.cooldown = 0
         self.health = life
+        self.points = 0
 
     def draw(self, screen):
         pygame.draw.polygon(screen, "pink", self.triangle(), 2)
