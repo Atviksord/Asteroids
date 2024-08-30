@@ -7,6 +7,7 @@ from asteroidfield import AsteroidField
 from shot import Shot
 from megashot import Megashot
 from player2 import Player2
+from mine import Mine
 
 
 
@@ -19,6 +20,7 @@ def main():
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
     megashots = pygame.sprite.Group()
+    mines = pygame.sprite.Group()
 
 
 
@@ -28,6 +30,7 @@ def main():
     Shot.containers = (updateable, drawable, shots)
     Megashot.containers = (updateable,drawable,megashots)
     Player2.containers = (updateable,drawable)
+    Mine.containers = (updateable,drawable,mines)
 
 
     player = Player(SCREEN_WIDTH /2,SCREEN_HEIGHT/2)
@@ -63,7 +66,7 @@ def main():
                     player2.kill()
             if player.health and player2.health <= 0:
                 print("--------GAME OVER-------")
-                sys.quit()
+                sys.exit()
                     
 
             for megashot in megashots:
@@ -75,6 +78,10 @@ def main():
                 if asteroid.collisioncheck(shot):
                     asteroid.split()
                     shot.kill()
+            for mine in mines:
+                if asteroid.collisioncheck(mine):
+                    asteroid.kill()
+                    mine.kill()
             
 
         screen.fill("black")
