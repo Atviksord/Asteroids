@@ -64,7 +64,8 @@ def main():
                 player2 = Player2(SCREEN_WIDTH /2,SCREEN_HEIGHT/2,player2.health)
                 if player2.health <= 0:
                     player2.kill()
-            if player.health and player2.health <= 0:
+            if player.health <=0 and player2.health <= 0:
+                print(player.health,player2.health)
                 print("--------GAME OVER-------")
                 sys.exit()
                     

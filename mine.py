@@ -6,7 +6,7 @@ class Mine(CircleShape):
     def __init__(self, x, y):
        super().__init__(x, y, SHOT_RADIUS)
     def draw(self, screen):
-        pygame.draw.circle(screen,"purple",self.position,15,15)
+        pygame.draw.circle(screen,"green",self.position,15,15)
     
    
     def update(self, dt):
