@@ -3,6 +3,7 @@ from circleshape import CircleShape
 from constants import *
 from shot import Shot
 from megashot import Megashot
+from mine import Mine
 
 class Player2(CircleShape):
     def __init__(self, x, y, life = 5):
@@ -13,6 +14,7 @@ class Player2(CircleShape):
         self.cooldown = 0
         self.health = life
         self.points = 0
+        self.mine_cooldown = 0
 
     def draw(self, screen):
         pygame.draw.polygon(screen, "pink", self.triangle(), 2)
@@ -42,6 +44,8 @@ class Player2(CircleShape):
             self.shoot()
         if keys[pygame.K_KP_1]:
             self.megashoot()
+        if keys[pygame.K_KP_2]:
+            self.placemine()
     
     def rotate(self,dt):
         self.rotation += PLAYER_TURN_SPEED * dt
@@ -58,6 +62,11 @@ class Player2(CircleShape):
             self.cooldown = MEGA_SHOT_COOLDOWN
             megashot = Megashot(self.position.x ,self.position.y)
             megashot.velocity = pygame.Vector2(0, 0.5).rotate(self.rotation ) * PLAYER_SHOOT_SPEED
+    def placemine(self):
+        if self.mine_cooldown <=0:
+            self.mine_cooldown = MINE_COOLDOWN
+            mine = Mine(self.position.x,self.position.y)
+            mine.velocity = pygame.Vector2(0,0).rotate(self.rotation) * PLAYER_SHOOT_SPEED
 
     
             
