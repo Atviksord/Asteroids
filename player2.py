@@ -46,6 +46,8 @@ class Player2(CircleShape):
             self.megashoot()
         if keys[pygame.K_KP_2]:
             self.placemine()
+        if keys[pygame.K_KP_9]:
+            self.pot()
     
     def rotate(self,dt):
         self.rotation += PLAYER_TURN_SPEED * dt
@@ -67,6 +69,8 @@ class Player2(CircleShape):
             self.mine_cooldown = MINE_COOLDOWN
             mine = Mine(self.position.x,self.position.y)
             mine.velocity = pygame.Vector2(0,0).rotate(self.rotation) * PLAYER_SHOOT_SPEED
+    def pot(self):
+        self.health++
 
     
             
